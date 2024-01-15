@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react';
 
-function padText(num: number, size: number, padString: string = '0') {
-  let paddedText = num + '';
+function padText(num: number, size: number, padString: string = '0'): string {
+  return num.toString().padStart(size, padString);
+}
 
-  while (paddedText.length < size) paddedText = padString + paddedText;
-
-  return paddedText;
+interface UserTimerReturn {
+  timeSince: number;
+  milliseconds: string;
+  seconds: string;
+  minutes: string;
+  hours: string;
+  days: string;
 }
 
 // A timer in milliseconds from the `startDate`
-export function useTimer(startDate: Date, refreshTime: number = 1) {
+export function useTimer(startDate: Date, refreshTime: number = 1): UserTimerReturn {
   const [timeSince, setTimeSince] = useState<number>(0);
 
   useEffect(() => {

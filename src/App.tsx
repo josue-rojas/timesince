@@ -1,5 +1,6 @@
 import './App.css';
 import { useTimer } from './useTimer';
+import { useEffect } from 'react';
 
 function useQuery() {
   return new URLSearchParams(window.location.search);
@@ -14,6 +15,10 @@ function App() {
 
   // Convert date string to Date object
   const date = new Date(DATE_DEFAULT);
+
+  useEffect(() => {
+    document.title = DEFAULT_TITLE;
+  }, [DEFAULT_TITLE]);
 
   const {
     milliseconds,

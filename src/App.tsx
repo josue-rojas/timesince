@@ -1,11 +1,20 @@
 import './App.css';
 import { useTimer } from './useTimer';
 
-const DATE_DEFAULT = 'December 4, 2021';
-const DEFAULT_TITLE = 'Time Since I+J First Date'
-const date = new Date(DATE_DEFAULT);
+function useQuery() {
+  return new URLSearchParams(window.location.search);
+}
 
 function App() {
+  const query = useQuery();
+
+  // Get date from query params or fall back to default
+  const DATE_DEFAULT = query.get('date') || 'December 4, 2021';
+  const DEFAULT_TITLE = `Time Since ${query.get('title') || 'I+J First Date'}`;
+
+  // Convert date string to Date object
+  const date = new Date(DATE_DEFAULT);
+
   const {
     milliseconds,
     seconds,
@@ -25,7 +34,7 @@ function App() {
           <div>{seconds}</div>
           <div>{milliseconds}</div>
           <div className='text'>Days</div>
-          <div className='text'>Hour</div>
+          <div className='text'>Hours</div>
           <div className='text'>Minutes</div>
           <div className='text'>Seconds</div>
           <div className='text'>Milliseconds</div>
